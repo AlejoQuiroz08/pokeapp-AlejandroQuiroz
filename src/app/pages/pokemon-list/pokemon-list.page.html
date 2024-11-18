@@ -1,0 +1,76 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title class="showdown-title">Pokémon Finder</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="showdown-background">
+  <!-- Menú de selección -->
+  <div class="search-container">
+    <ion-item class="type-select">
+      <ion-label>Tipo de Pokémon</ion-label>
+      <ion-select [(ngModel)]="selectedType" (ionChange)="loadPokemonByType()">
+        <ion-select-option *ngFor="let type of pokemonTypes" [value]="type">
+          {{ type | titlecase }}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+    
+    <ion-item class="pokemon-select">
+      <ion-label>Selecciona un Pokémon</ion-label>
+      <ion-select [(ngModel)]="selectedPokemon" (ionChange)="searchPokemon()">
+        <ion-select-option *ngFor="let pokemon of pokemonList" [value]="pokemon">
+          {{ pokemon | titlecase }}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+  </div>
+  
+  <!-- Detalles del Pokémon -->
+  <div class="pokemon-details" *ngIf="pokemonData">
+    <ion-card class="details-card">
+      <ion-card-header>
+        <ion-card-title class="pokemon-name">{{ pokemonData.name | titlecase }}</ion-card-title>
+      </ion-card-header>
+      
+      <ion-card-content>
+        <div class="sprite-container">
+          <ion-img [src]="isShiny ? pokemonData.sprites.front_shiny : pokemonData.sprites.front_default" (click)="toggleShiny()"></ion-img>
+        </div>
+        <p><strong>Altura:</strong> {{ pokemonData.height / 10 }} m</p> <!-- Altura en metros -->
+        <p><strong>Peso:</strong> {{ pokemonData.weight / 10 }} kg</p> <!-- Peso en kilogramos -->
+        <p><strong>Habilidad:</strong> {{ pokemonData.abilities[0].ability.name | titlecase }}</p> <!-- Habilidad -->
+
+        <!-- Tipos del Pokémon -->
+        <p>
+          <strong>Tipos:</strong>
+          <span *ngFor="let type of pokemonData.types" 
+                [style.background-color]="getTypeColor(type.type.name)"
+                class="pokemon-type">
+            {{ type.type.name | titlecase }}
+          </span>
+        </p>
+        
+        <!-- Estadísticas del Pokémon como barras de progreso -->
+        <div class="stats-container">
+          <div *ngFor="let stat of pokemonData.stats">
+            <ion-label>{{ stat.stat.name | titlecase }}: {{ stat.base_stat }}</ion-label>
+            <ion-progress-bar 
+              [value]="stat.base_stat / 255"
+              [color]="getStatColor(stat.base_stat)"
+              style="margin-bottom: 10px;">
+            </ion-progress-bar>
+          </div>
+        </div>
+
+        <!-- Botón para reproducir el cry -->
+        <ion-button expand="block" color="success" (click)="playCry()">Reproducir Cry</ion-button>
+      </ion-card-content>
+    </ion-card>
+  </div>
+  
+  <audio #cryAudio [src]="cryUrl" preload="auto"></audio>
+
+  <!-- Error -->
+  <ion-text color="danger" *ngIf="error">{{ error }}</ion-text>
+</ion-content>

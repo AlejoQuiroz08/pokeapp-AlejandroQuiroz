@@ -1,0 +1,76 @@
+.showdown-background {
+    background-color: #ebdfbe; /* Color personalizado */
+    min-height: 100%;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  
+  .search-container {
+    margin: 20px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .type-select,
+  .pokemon-select {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background: #fff;
+  }
+  
+  .pokemon-details {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+  }
+  .details-card {
+    background: #ffffff;
+    border: 2px solid #d4b87b; /* Un borde que combine con el fondo */
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    text-align: center;
+  }
+  
+  
+  .sprite-container ion-img {
+    max-width: 150px;
+    margin: auto;
+  }
+  
+  .pokemon-name {
+    font-size: 1.8em;
+    font-weight: bold;
+    color: #4a4a4a; /* Un tono gris oscuro */
+    text-shadow: 1px 1px #ffffff;
+  }
+  
+  
+  ion-button {
+    font-size: 1em;
+    font-weight: bold;
+    margin-top: 10px;
+    background: #ff9800; /* Color naranja para destacar */
+    color: #ffffff;
+    border-radius: 8px;
+  }
+  .stats-container {
+    margin-top: 20px;
+  }
+  
+  .stats-container ion-label {
+    font-size: 1.1em;
+    font-weight: bold;
+    color: #555;
+  }
+  
+  ion-progress-bar {
+    border-radius: 10px;
+    height: 10px;
+  }
+  
+  
